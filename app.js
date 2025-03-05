@@ -1,9 +1,13 @@
 import express from "express"
 import mongoose from "mongoose"
 import 'dotenv/config'
+import AuthRoutes from './routes/authRoutes.js'
+
+
 const app = express()
 const port = process.env.PORT
-import AuthRoutes from './routes/authRoutes.js'
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }));
 
 
 app.use('/api/v1/auth', AuthRoutes);
