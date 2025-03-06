@@ -2,6 +2,7 @@ import express from "express"
 import mongoose from "mongoose"
 import 'dotenv/config'
 import AuthRoutes from './routes/authRoutes.js'
+import { errorHandler, notFoundPath } from "./middleware/errorMiddleware.js"
 
 
 const app = express()
@@ -11,6 +12,9 @@ app.use(express.urlencoded({ extended: true }));
 
 
 app.use('/api/v1/auth', AuthRoutes);
+
+app.use(notFoundPath)
+app.use(errorHandler)
 
 try {
   await mongoose.connect(process.env.DATABASE);
